@@ -2,7 +2,7 @@
 
 ## Description:
 
-This WordPress theme library provides methods to submit learning statements to an LRS that adhere to the xAPI spec. It implements the following verbs related to consuming educational content:
+This WordPress theme library provides methods to submit learning statements to an LRS that adhere to the xAPI spec although no formal profile was used. It implements the following verbs related to consuming educational content:
 
 * failed
 * completed
