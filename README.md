@@ -2,7 +2,7 @@
 
 ## Description:
 
-This WordPress theme library provides methods to submit learning statements to an LRS that adhere to the xAPI spec although no formal profile was used.
+This WordPress theme library provides methods to submit learning statements to an LRS that adhere to the xAPI spec although no formal profile was used. The library was used for the OER course [LTEC 112 - Technologies for Academic Success](https://dcdc.coe.hawaii.edu/ltec/112/welcome/). 
 
 ### Verbs:
 The library implements the following verbs related to consuming educational content:
@@ -15,11 +15,11 @@ The library implements the following verbs related to consuming educational cont
 * viewed
 * rescored
 
-### Additional data
+### Additional data:
 The following statement modifications and extensions were added. They can be removed based on individual need.
 
-**Bloom's Taxonomy**
-Categorization of assessments through Bloom's Taxonomy was appended to the answered statement. Statements were intended to include a primary and secondary descriptions to facilitate data filtering for post course analysis.
+### Bloom's Taxonomy
+Categorization of assessments through Bloom's Taxonomy was appended to the answered statement. Statements were intended to include a primary and secondary description to facilitate data filtering for post course analysis. Example of primary and secondary verbs [here](http://www.celt.iastate.edu/teaching/effective-teaching-practices/revised-blooms-taxonomy).
 
 ```
 if ( $verb_name === 'answered' ) {
@@ -38,7 +38,7 @@ if ( $verb_name === 'answered' ) {
 }
 ```
 
-**Section UUID**
+### Section UUID
 Section UUID was originally used within the course to assist in grouping students within the same section. This approach was discontinued and is no longer recommended. We suggest the use of contextActivities instead, but have kept the code in here as an example.
 
 ```
