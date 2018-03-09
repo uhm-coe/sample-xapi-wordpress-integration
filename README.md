@@ -2,7 +2,10 @@
 
 ## Description:
 
-This WordPress theme library provides methods to submit learning statements to an LRS that adhere to the xAPI spec although no formal profile was used. It implements the following verbs related to consuming educational content:
+This WordPress theme library provides methods to submit learning statements to an LRS that adhere to the xAPI spec although no formal profile was used.
+
+### Verbs:
+The library implements the following verbs related to consuming educational content:
 
 * failed
 * completed
@@ -11,6 +14,46 @@ This WordPress theme library provides methods to submit learning statements to a
 * commented
 * viewed
 * rescored
+
+### Additional data
+The following statement modifications and extensions were added. They can be removed based on individual need.
+
+**Bloom's Taxonomy**
+Categorization of assessments through Bloom's Taxonomy was appended to the answered statement. Statements were intended to include a primary and secondary descriptions to facilitate data filtering for post course analysis.
+
+```
+if ( $verb_name === 'answered' ) {
+  $bloom = explode( '-', $data['question_bloom'] );
+  if ( count( $bloom ) > 1 ) {
+    $object['extensions'] = array(
+      $xapi_catalog_url . 'framework/blooms/primary' => array(
+        'name' => $bloom[0],
+      ),
+      $xapi_catalog_url . 'framework/blooms/secondary' => array(
+        'name' => $bloom[1],
+      ),
+    );
+  }
+  $object['name'] .= ', Question ' . $data['question_id'];
+}
+```
+
+**Section UUID**
+Section UUID was originally used within the course to assist in grouping students within the same section. This approach was discontinued and is no longer recommended. We suggest the use of contextActivities instead, but have kept the code in here as an example.
+
+```
+$user_section = get_field( 'user_section', 'user_' . $user->ID );
+$user_section_uuid = '00000000-0000-4000-B000-000000000000'; // UUID  version 4 (random)
+while ( have_rows( 'course_sections', 'options' ) ) {
+  the_row();
+  $name = get_sub_field( 'course_section_name' );
+  $semester = get_sub_field( 'course_section_semester' );
+  $year = get_sub_field( 'course_section_year' );
+  if ( $user_section === "$year-$semester-" . sanitize_title( $name ) ) {
+    $user_section_uuid = get_sub_field( 'course_section_uuid' );
+  }
+}
+```
 
 ## Installation:
 
